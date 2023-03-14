@@ -13,25 +13,30 @@
                 </div>
             </div>
             <div class="body">
-                <PostCard v-for="{ card, index } in 5" :key="index"></PostCard>
+                <PostCard v-for="post in allPosts" :post="post" :key="post.id"></PostCard>
             </div>
         </v-app>
 
     </div>
 </template>
 <script>
-import { get } from "vuex-pathify"
+import { get, dispatch } from "vuex-pathify"
 import PostCard from "../components/PostCard.vue"
+
 export default {
     name: "PostView",
     components: { PostCard },
     computed: {
+        allPosts: get("allPosts"),
         isLoading: get("isLoading")
     },
     data() {
         return {
-            items: [3, 34]
+            items: [1, 2, 4]
         }
+    },
+    async created() {
+        await dispatch("getAllPosts");
     }
 
 }
@@ -71,13 +76,13 @@ export default {
         }
 
         .body {
-            padding: 20px 50px;
+            padding: 30px 260px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
 
-        
+
     }
 }
 </style>

@@ -9,7 +9,7 @@ export default new VueRouter({
     routes: [{
             path: "/",
             redirect: {
-                name: "auth",
+                name: "post",
             },
         },
         {

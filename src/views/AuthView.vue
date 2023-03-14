@@ -72,7 +72,7 @@
 <script>
 import { or, email, sameAs, helpers, required, minLength } from 'vuelidate/lib/validators'
 import * as errorMessages from '../utils/errorMessages'
-import ky from '../plugins/key'
+import ky from '../plugins/ky'
 import { commit, get } from 'vuex-pathify';
 const phoneReg = helpers.regex("phoneReg", /(84|0[3|7|8|9])+([0-9]{8})\b/)
 import Vue from 'vue'
