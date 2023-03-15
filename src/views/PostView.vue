@@ -13,30 +13,50 @@
                 </div>
             </div>
             <div class="body">
-                <PostCard v-for="post in allPosts" :post="post" :key="post.id"></PostCard>
+                <PostCard v-for="post in pagePosts" :post="post" :key="post.id"></PostCard>
+            </div>
+            <div class="footer">
+                <v-pagination @input="changePage()" circle color='red' v-model="page" :length="totalPage"
+                    total-visible="7"></v-pagination>
             </div>
         </v-app>
 
     </div>
 </template>
 <script>
-import { get, dispatch } from "vuex-pathify"
+import { get, dispatch, commit } from "vuex-pathify"
 import PostCard from "../components/PostCard.vue"
+import { LIMIT_PAGE } from "../utils/constants"
 
 export default {
     name: "PostView",
     components: { PostCard },
     computed: {
         allPosts: get("allPosts"),
-        isLoading: get("isLoading")
+        pagePosts: get("pagePosts"),
+        isLoading: get("isLoading"),
+        totalPage() {
+            return Math.ceil(this.allPosts.length / LIMIT_PAGE)
+        }
     },
     data() {
         return {
-            items: [1, 2, 4]
+            items: [1, 2, 4],
+            page: 1,
         }
     },
+    methods: {
+        async changePage() {
+            await dispatch("getPagePosts", this.page)
+            window.scrollTo({ top: 0, behavior: "smooth" })
+        }
+    },
+
     async created() {
+        commit("SET_IS_LOADING", true)
         await dispatch("getAllPosts");
+        await this.changePage();
+        commit("SET_IS_LOADING", false)
     }
 
 }
@@ -76,7 +96,7 @@ export default {
         }
 
         .body {
-            padding: 30px 260px;
+            padding: 30px 250px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;

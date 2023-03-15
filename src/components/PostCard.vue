@@ -27,7 +27,6 @@ export default {
     methods: {
         async getUserById() {
             const user = await ky.get(`users/${this.post.userId}`).json()
-            console.log("user", user)
             this.userInfor = user
         }
 
