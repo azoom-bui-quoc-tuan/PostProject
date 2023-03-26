@@ -4,12 +4,13 @@ import HomeView from "../views/HomeView.vue";
 import AuthView from "../views/AuthView.vue";
 // import NotFoundView from "../views/NotFoundView.vue";
 import PostView from "../views/PostView.vue";
+import NotificationView from "../views/NotificationView.vue";
 Vue.use(VueRouter);
 export default new VueRouter({
     routes: [{
             path: "/",
             redirect: {
-                name: "post",
+                name: "noti",
             },
         },
         {
@@ -31,11 +32,16 @@ export default new VueRouter({
         //     path: "/:pathMatch(.*)*",
         //     name: "NotFound",
         //     component: NotFoundView
-        // }, 
+        // },
         {
             path: "/posts",
             name: "post",
-            component: PostView
-        }
+            component: PostView,
+        },
+        {
+            path: "/notification",
+            name: "noti",
+            component: NotificationView,
+        },
     ],
 });

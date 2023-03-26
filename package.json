@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "core-js": "^3.8.3",
+        "firebase": "^9.18.0",
         "key": "^0.1.11",
         "ky": "^0.33.2",
         "ky-universal": "^0.11.0",

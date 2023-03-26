@@ -60,7 +60,8 @@
                         </v-radio-group>
 
                         <div class="btn">
-                            <v-btn @click="register()">Register</v-btn>
+                            <v-btn @click="register()"
+                                :disabled="$v.registerInfor.$invalid || $v.registerInfor.$error">Register</v-btn>
                             <v-btn @click="clearFormRegister">Cancel</v-btn>
                         </div>
                     </form>
